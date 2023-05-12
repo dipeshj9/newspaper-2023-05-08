@@ -9,8 +9,19 @@
        <ul class="blog-info-link mt-3 mb-4">
           <li><a href="#"><i class="fa fa-user"></i>{{ post.tag.all|join:", "}}</a></li>
           <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
-          <li><a href="#"><i class="fa fa-eye"></i>{{ post.views_count }}</a></li>
+          <li><a href="#"><i class="fa fa-eye"></i>{{ post.views_count }}</a></li>          
        </ul>
-       {{ post.content|linebreaksbr }}
+       {% if user.is_authenticated %} 
+
+       <div class="form-group mt-3">
+         <a href="{% url 'blog:post-update' post.pk %}"
+            class="button button-contactForm boxed-btn">Update</a>
+         <a href="{% url 'blog:post-delete' post.pk %}"
+            class="button button-contactForm boxed-btn">Delete</a>
+       </div>
+
+       {% endif %}
+       
+       {{ post.content|safe }}
     </div>
  </div>
